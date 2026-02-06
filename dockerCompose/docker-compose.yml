@@ -1,0 +1,36 @@
+services:
+  database:
+   image: mysql:latest
+   volumes:
+     - dbWebService:/var/lib/mysql
+   restart: always
+   environment:
+     MYSQL_ROOT_PASSWORD: dbWebService
+     MYSQL_DATABASE: webservice
+     MYSQL_USER: wordpress
+     MYSQL_PASSWORD: wordpress
+   networks:
+    - webservice
+
+  Web:
+   image: wordpress:latest
+   ports:
+     - "8080:80"
+   restart: always
+   depends_on:
+     - database
+   environment:
+     WORDPRESS_DB_HOST: database:3306
+     WORDPRESS_DB_USER: wordpress
+     WORDPRESS_DB_PASSWORD: wordpress
+     WORDPRESS_DB_NAME: webservice
+   networks:
+    - webservice
+
+networks:
+ webservice:
+   driver: bridge
+   name: webserviceNetwork
+
+volumes:
+  dbWebService:
