@@ -11,6 +11,13 @@ services:
      MYSQL_PASSWORD: wordpress
    networks:
     - webservice
+   container_name: mysqldbcompose
+   healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--host=localhost"]
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
 
   Web:
    image: wordpress:latest
@@ -26,6 +33,13 @@ services:
      WORDPRESS_DB_NAME: webservice
    networks:
     - webservice
+   container_name: wordpressWeb
+   healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
 
 networks:
  webservice:
@@ -34,3 +48,4 @@ networks:
 
 volumes:
   dbWebService:
+   external: True
