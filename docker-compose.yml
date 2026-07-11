@@ -5,10 +5,10 @@ services:
      - dbWebService:/var/lib/mysql
    restart: always
    environment:
-     MYSQL_ROOT_PASSWORD: dbWebService
-     MYSQL_DATABASE: webservice
-     MYSQL_USER: wordpress
-     MYSQL_PASSWORD: wordpress
+     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+     MYSQL_DATABASE: ${MYSQL_DATABASE}
+     MYSQL_USER: ${MYSQL_USER}
+     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
    networks:
     - webservice
    container_name: mysqldbcompose
@@ -28,9 +28,9 @@ services:
      - database
    environment:
      WORDPRESS_DB_HOST: database:3306
-     WORDPRESS_DB_USER: wordpress
-     WORDPRESS_DB_PASSWORD: wordpress
-     WORDPRESS_DB_NAME: webservice
+     WORDPRESS_DB_USER: ${MYSQL_USER}
+     WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+     WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
    networks:
     - webservice
    container_name: wordpressWeb
