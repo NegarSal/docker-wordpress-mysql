@@ -19,7 +19,7 @@ services:
       start_period: 10s
       timeout: 10s
 
-  Web:
+  wordpress:
    image: wordpress:6.8.2-apache
    ports:
      - "8080:80"
