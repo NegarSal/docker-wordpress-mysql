@@ -1,34 +1,59 @@
-# Dockerized WordPress with MySQL
+# Dockerized WordPress with Nginx Reverse Proxy
 
-This project provides a production-ready WordPress environment using Docker Compose.
-The stack includes WordPress and MySQL with persistent storage, service isolation, and health checks.
+This project demonstrates a multi-container WordPress application using Docker Compose.
+
+The stack includes Nginx as a Reverse Proxy, WordPress, and MySQL with persistent storage, service isolation, and health checks.
 
 ## Technologies Used
 - Docker
 - Docker Compose
+- Nginx
 - WordPress
 - MySQL
 
 ## Architecture
-- WordPress runs in its own container
-- MySQL runs in a separate container
-- Containers communicate over a dedicated Docker network
-- Data is persisted using Docker volumes
-- Health checks ensure services are running before dependent services start
+- Nginx acts as a Reverse Proxy.
+- WordPress runs in its own container.
+- MySQL runs in a separate container.
+- Containers communicate over a dedicated Docker network.
+- Data is persisted using Docker volumes.
+- Health checks monitor service availability.
+
+## Architecture Diagram
+
+```text
+Browser
+    │
+    ▼
+Nginx (Reverse Proxy)
+    │
+    ▼
+WordPress
+    │
+    ▼
+MySQL
+``` 
 
 ## Prerequisites
 - Docker
 - Docker Compose
 
 ## How to Run
+
 ```bash
+cp .env.example .env
 docker compose up -d
 ```
+
 ## Access WordPress at:
+
+```text
 http://localhost:8080
+```
 
 ## Configuration
-- Environment variables are managed using a .env file
+- Environment variables are managed using a .env file 
+- Create your `.env` file by copying `.env.example`.
 - MySQL credentials and WordPress DB config are stored in environment variables
 
 ## Persistence
@@ -38,7 +63,7 @@ http://localhost:8080
 ## Troubleshooting
 - Check logs:
 ```bash
-docker logs <container_name>
+docker compose logs
 ```
 - Restart containers if needed:
 ```bash
@@ -46,7 +71,10 @@ docker compose restart
 ```
 
 ## What I Learned
+
 - Designing multi-container applications using Docker Compose
 - Managing service dependencies
 - Using volumes for persistent data
+- Configuring Nginx as a Reverse Proxy
+- Managing application traffic through a reverse proxy
 - Applying DevOps best practices for local development environments
