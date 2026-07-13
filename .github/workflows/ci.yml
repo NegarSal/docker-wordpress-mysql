@@ -15,3 +15,9 @@ jobs:
 
       - name: Validate Docker Compose file
         run: docker compose config
+
+      - name: Start containers
+        run: docker compose up -d
+
+      - name: Wait for services
+        run: sleep 30
