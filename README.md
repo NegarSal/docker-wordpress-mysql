@@ -10,6 +10,8 @@ The stack includes Nginx as a Reverse Proxy, WordPress, and MySQL with persisten
 - Nginx
 - WordPress
 - MySQL
+- GitHub Actions
+- GitHub Secrets
 
 ## Architecture
 - Nginx acts as a Reverse Proxy.
@@ -18,6 +20,7 @@ The stack includes Nginx as a Reverse Proxy, WordPress, and MySQL with persisten
 - Containers communicate over a dedicated Docker network.
 - Data is persisted using Docker volumes.
 - Health checks monitor service availability.
+- CI validation is performed using GitHub Actions.
 
 ## Architecture Diagram
 
@@ -78,3 +81,15 @@ docker compose restart
 - Configuring Nginx as a Reverse Proxy
 - Managing application traffic through a reverse proxy
 - Applying DevOps best practices for local development environments
+- Building CI pipelines using GitHub Actions
+- Managing sensitive configuration with GitHub Repository Secrets
+
+## Continuous Integration
+
+This project uses GitHub Actions to:
+
+- Validate the Docker Compose configuration
+- Start the application stack
+- Verify service availability using an HTTP health check
+
+Sensitive configuration is securely managed using GitHub Repository Secrets.
