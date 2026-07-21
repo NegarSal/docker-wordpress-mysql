@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: nginx-config
+  namespace: wordpress
+
+data:
+  APP_NAME: "My Nginx App"
+  APP_ENV: "development"
+  APP_PORT: "80"
