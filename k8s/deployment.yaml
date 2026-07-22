@@ -25,6 +25,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: nginx-config
+            - secretRef:
+                name: mysql-secret
 
           ports:
             - containerPort: 80
