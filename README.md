@@ -1,12 +1,13 @@
 # Dockerized WordPress with Nginx Reverse Proxy
 
-This project demonstrates a multi-container WordPress application using Docker Compose.
+This project demonstrates a multi-container WordPress application using Docker Compose and Kubernetes.
 
-The stack includes Nginx as a Reverse Proxy, WordPress, and MySQL with persistent storage, service isolation, and health checks.
+The project includes Nginx as a Reverse Proxy, WordPress, MySQL, persistent storage, health checks, GitHub Actions, and Kubernetes manifests for local development with Kind.
 
 ## Technologies Used
 - Docker
 - Docker Compose
+- Kubernetes (Kind)
 - Nginx
 - WordPress
 - MySQL
@@ -37,9 +38,32 @@ WordPress
 MySQL
 ``` 
 
+## Kubernetes Deployment
+
+This repository also contains a Kubernetes version of the application inside the `k8s/` directory.
+
+Included resources:
+
+- Namespace
+- ConfigMap
+- Secret
+- PersistentVolume (PV)
+- PersistentVolumeClaim (PVC)
+- Deployment
+- Service
+- Ingress
+- NGINX Ingress Controller
+
+The Kubernetes deployment was tested locally using **Kind**.
+
+> Note:
+> The included `ingress-nginx.yaml` uses a mirror registry because the official Kubernetes registry may be inaccessible in some regions.
+
 ## Prerequisites
 - Docker
 - Docker Compose
+- Kind
+- kubectl
 
 ## How to Run
 
@@ -48,10 +72,20 @@ cp .env.example .env
 docker compose up -d
 ```
 
-## Access WordPress at:
+## Access
+
+### Docker Compose
 
 ```text
 http://localhost:8080
+```
+
+### Kubernetes
+
+After deploying the Kubernetes manifests and configuring the local host entry:
+
+```text
+http://wordpress.local
 ```
 
 ## Configuration
@@ -73,6 +107,27 @@ docker compose logs
 docker compose restart
 ```
 
+## Project Structure
+
+```text
+.
+├── docker-compose.yml
+├── nginx/
+│   └── default.conf
+├── k8s/
+│   ├── namespace.yaml
+│   ├── configmap.yaml
+│   ├── secret.yaml
+│   ├── pv.yaml
+│   ├── pvc.yaml
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   ├── ingress.yaml
+│   ├── ingress-nginx.yaml
+│   └── kind-config.yaml
+└── README.md
+```
+
 ## What I Learned
 
 - Designing multi-container applications using Docker Compose
@@ -83,6 +138,9 @@ docker compose restart
 - Applying DevOps best practices for local development environments
 - Building CI pipelines using GitHub Actions
 - Managing sensitive configuration with GitHub Repository Secrets
+- Deploying applications on Kubernetes
+- Managing Kubernetes networking using Services and Ingress
+- Running Kubernetes locally with Kind
 
 ## Continuous Integration
 
