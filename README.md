@@ -120,8 +120,12 @@ docker compose restart
 │   ├── secret.yaml
 │   ├── pv.yaml
 │   ├── pvc.yaml
-│   ├── deployment.yaml
-│   ├── service.yaml
+│   ├── mysql-pv.yaml
+│   ├── mysql-pvc.yaml
+│   ├── mysql-deployment.yaml
+│   ├── mysql-service.yaml
+│   ├── wordpress-deployment.yaml
+│   ├── wordpress-service.yaml
 │   ├── ingress.yaml
 │   ├── ingress-nginx.yaml
 │   └── kind-config.yaml
